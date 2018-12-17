@@ -6,7 +6,7 @@ package ru.job4j.calculate;
  * @since 17.12.18
  */
 
-class Calculate {
+public class Calculate {
 
     /**
      * @param args - имя строк.
