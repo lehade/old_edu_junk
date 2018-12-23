@@ -5,9 +5,9 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Alexey Denisenko
  * @version $Id$
- * @since 0.1
+ * @since 23.12.2018
  */
 public class DummyBotTest {
     @Test
