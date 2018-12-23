@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * @author Alexey Denisenko
- * @version $Id$
+ * @version 0.1
  * @since 23.12.2018
  */
 public class DummyBotTest {
