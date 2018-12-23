@@ -9,9 +9,9 @@ package ru.job4j.max;
 public class Max {
 
     public int max(int first, int second, int third) {
-        int temp = this.max(first, second);
-        int maxT = this.max(temp, third);
-        return maxT;
+        //int temp = this.max(first, second);
+        //int maxT = this.max(temp, third);
+        return this.max(this.max(first, second), third);
     }
 
     public int max(int first, int second) {
