@@ -8,10 +8,14 @@ package ru.job4j.max;
 
 public class Max {
 
+    public int max(int first, int second, int third) {
+        int temp = this.max(first, second);
+        int maxT = this.max(temp, third);
+        return maxT;
+    }
+
     public int max(int first, int second) {
-
         int max = first > second ? first : second;
-
         return max;
     }
 

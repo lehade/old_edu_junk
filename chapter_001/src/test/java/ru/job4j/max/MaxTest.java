@@ -19,5 +19,11 @@ public class MaxTest {
         int result = maxim.max(5, 9);
         assertThat(result, is(9));
     }
+    @Test
+    public void whenMaxIntFromThree() {
+        Max maxim = new Max();
+        int result = maxim.max(15, 19, 16);
+        assertThat(result, is(19));
+    }
 
 }
