@@ -18,7 +18,6 @@ public class PaintTest {
     public void whenPyramidIsThree() {
         Paint paint = new Paint();
         String rst = paint.pyramid(3);
-        System.out.println(rst);
         assertThat(rst,
                 is(
                         new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
@@ -34,7 +33,6 @@ public class PaintTest {
     public void whenPyramidIsTwo() {
         Paint paint = new Paint();
         String rst = paint.pyramid(2);
-        System.out.println(rst);
         assertThat(rst,
                 is(
                         new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
