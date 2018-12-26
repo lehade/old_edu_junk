@@ -14,6 +14,37 @@ import static org.junit.Assert.*;
  */
 
 public class PaintTest {
+
+    @Test
+    public void whenPyramidIs4Right() {
+        Paint paint = new Paint();
+        String rst = paint.rightTrl(3);
+        assertThat(rst,
+                is(
+                        new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("^  ")
+                                .add("^^ ")
+                                .add("^^^")
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenPyramidIs4Left() {
+        Paint paint = new Paint();
+        String rst = paint.leftTrl(3);
+        assertThat(rst,
+                is(
+                        new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("  ^")
+                                .add(" ^^")
+                                .add("^^^")
+                                .toString()
+                )
+        );
+    }
+
     @Test
     public void whenPyramidIsThree() {
         Paint paint = new Paint();
