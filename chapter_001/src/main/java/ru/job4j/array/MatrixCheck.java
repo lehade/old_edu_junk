@@ -10,19 +10,12 @@ public class MatrixCheck {
 
     public boolean mono(boolean[][] data) {
         boolean result = true;
-        for (int i = data.length - 1; i > 0; i--) {
-            if (data[0][i] != data[i][i]) {
-                result = false;
-                break;
-            }
-        }
         for (int i = 0; i < data.length; i++) {
-            if (data[0][0] != data[i][i]) {
+            if (data[0][0] != data[i][i] || data[data.length - i - 1][i] != data[0][0]) {
                 result = false;
                 break;
             }
         }
         return result;
     }
-
 }
