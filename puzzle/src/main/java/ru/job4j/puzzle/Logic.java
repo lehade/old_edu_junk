@@ -83,10 +83,9 @@ public class Logic {
             if ((column == table.length) || (row == table.length)) {
                 result = true;
                 break;
-            } else {
-                row = 0;
-                column = 0;
             }
+            row = 0;
+            column = 0;
         }
         return result;
     }
