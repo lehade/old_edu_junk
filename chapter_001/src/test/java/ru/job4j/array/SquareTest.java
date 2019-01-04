@@ -37,5 +37,4 @@ public class SquareTest {
         int[] expect = new int[] {1, 4, 9, 16, 25, 36};
         assertThat(rst, is(expect));
     }
-
 }

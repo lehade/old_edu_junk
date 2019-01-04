@@ -7,7 +7,6 @@ package ru.job4j.loop;
  */
 
 public class Counter {
-
     public int add(int start, int finish) {
         int temp = 0;
         for (int i = start; i <= finish; i++) {
@@ -17,5 +16,4 @@ public class Counter {
         }
         return temp;
     }
-
 }

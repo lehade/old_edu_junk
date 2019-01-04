@@ -16,5 +16,4 @@ public class PointTest {
         assertThat(result, is(expected));
 
     }
-
 }

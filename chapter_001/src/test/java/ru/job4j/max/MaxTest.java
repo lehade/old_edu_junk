@@ -25,5 +25,4 @@ public class MaxTest {
         int result = maxim.max(15, 19, 16);
         assertThat(result, is(19));
     }
-
 }

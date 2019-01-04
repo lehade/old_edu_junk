@@ -9,7 +9,6 @@ import java.util.Arrays;
  */
 
 public class ArrayDuplicate {
-
     public String[] removeDuplicates(String[] array) {
         int duplicate = array.length;
         for (int i = 0; i < duplicate; i++) {
@@ -23,5 +22,4 @@ public class ArrayDuplicate {
         }
         return Arrays.copyOf(array, duplicate);
     }
-
 }
