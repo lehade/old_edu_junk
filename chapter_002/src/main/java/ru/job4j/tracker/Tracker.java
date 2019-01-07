@@ -15,12 +15,18 @@ public class Tracker {
     private int position = 0;
     private static final Random RN = new Random();
 
+    /**
+     * Добавляем заявку
+     */
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items[this.position++] = item;
         return item;
     }
 
+    /**
+     * Заменяем заявку
+     */
     public boolean replace(String id, Item item) {
         boolean replace = false;
         for (int i = 0; i < this.position; i++) {
@@ -33,6 +39,9 @@ public class Tracker {
         return replace;
     }
 
+    /**
+     * Удаляем заявку
+     */
     public boolean delete(String id) {
         boolean result = false;
         for (int i = 0; i < this.position; i++) {
@@ -46,11 +55,16 @@ public class Tracker {
         return result;
     }
 
+    /**
+     * Вывод всех заявок
+     */
     public Item[] findAll() {
-        Item[] result = Arrays.copyOf(this.items, this.position);
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
+    /**
+     * Поиск заявок по имени
+     */
     public Item[] findByName(String key) {
         Item[] temp = new Item[this.position];
         int count = 0;
@@ -63,6 +77,9 @@ public class Tracker {
         return listOfNames;
     }
 
+    /**
+     * Поиск заявок по id
+     */
     public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
@@ -74,6 +91,9 @@ public class Tracker {
         return result;
     }
 
+    /**
+     * Генерация id заявки
+     */
     private String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
     }

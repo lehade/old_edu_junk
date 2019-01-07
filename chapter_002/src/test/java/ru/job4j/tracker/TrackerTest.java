@@ -13,6 +13,9 @@ import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
 
+    /**
+     * Тест на проверку добавления заявки
+     */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
@@ -21,6 +24,9 @@ public class TrackerTest {
         assertThat(tracker.findAll()[0], is(item));
     }
 
+    /**
+     * Тест на проверку замены одной заявки на другую
+     */
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
@@ -37,6 +43,9 @@ public class TrackerTest {
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
 
+    /**
+     * Тест на проверку удаления заявки с поиском по id заявки
+     */
     @Test
     public void deleteByIdTest() {
         Tracker tracker = new Tracker();
@@ -53,6 +62,9 @@ public class TrackerTest {
         assertThat(tracker.findAll(), is(expected));
     }
 
+    /**
+     * Тест на проверку добавления и вывода всех заявок
+     */
     @Test
     public void findAllTest() {
         Tracker tracker = new Tracker();
@@ -69,6 +81,9 @@ public class TrackerTest {
         assertThat(tracker.findAll(), is(expected));
     }
 
+    /**
+     * Тест на поиск заявок по id
+     */
     @Test
     public void findByIdTest() {
         Tracker tracker = new Tracker();
@@ -81,6 +96,9 @@ public class TrackerTest {
         assertThat(tracker.findById(item2.getId()).getName(), is("test2"));
     }
 
+    /**
+     * Тест на поиск заявок по имени
+     */
     @Test
     public void findByNameTest() {
         Tracker tracker = new Tracker();
