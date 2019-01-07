@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @since 07.01.2019
  */
 
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
     Scanner scanner = new Scanner(System.in);
     public String ask(String question) {
         System.out.print(question);

@@ -13,7 +13,7 @@ public class Doctor extends Profession {
         this.profession = profession;
     }
 
-    public void curePatient (Patient patient){
+    public void curePatient(Patient patient) {
 
     }
 }

@@ -13,7 +13,7 @@ public class Teacher extends Profession {
         this.profession = profession;
     }
 
-    public void teach (Student student) {
+    public void teach(Student student) {
 
     }
 }
