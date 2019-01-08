@@ -68,4 +68,23 @@ public class StartUITest {
         expected[1] = item3;
         assertThat(tracker.findAll(), is(expected));
     }
+
+    @Test
+    public void showAll() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc"));
+        Item item2 = tracker.add(new Item("test name2", "desc2"));
+        Item item3 = tracker.add(new Item("test name3", "desc3"));
+        Item item4 = tracker.add(new Item("test name4", "desc4"));
+        Item item5 = tracker.add(new Item("test name5", "desc5"));
+        Input input = new StubInput(new String[]{"1", "6"});
+        new StartUI(input, tracker).init();
+        Item[] expected = new Item[5];
+        expected[0] = item;
+        expected[1] = item2;
+        expected[2] = item3;
+        expected[3] = item4;
+        expected[4] = item5;
+        assertThat(tracker.findAll(), is(expected));
+    }
 }
