@@ -24,8 +24,6 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
 
-        //Тут валится тест, из- за обнуления id при редактировании заявки
-
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
@@ -47,9 +45,13 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Item item1 = tracker.add(new Item("test name1", "desc"));
-        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
+        Item item2 = tracker.add(new Item("test name", "desc2"));
+        Input input = new StubInput(new String[]{"5", item.getName(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[1].getName(), is("test name1"));
+        Item[] expected = new Item[2];
+        expected[0] = item;
+        expected[1] = item2;
+        assertThat(tracker.findByName("test name"), is(expected));
     }
 
     @Test
@@ -61,6 +63,9 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"3", item2.getId(), "6"});
         new StartUI(input, tracker).init();
         tracker.delete(item2.getId());
-        assertThat(tracker.findAll()[1].getName(), is("test name3"));
+        Item[] expected = new Item[2];
+        expected[0] = item;
+        expected[1] = item3;
+        assertThat(tracker.findAll(), is(expected));
     }
 }

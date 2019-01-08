@@ -32,6 +32,7 @@ public class Tracker {
         for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = item;
+                items[i].setId(id);
                 replace = true;
                 break;
             }
