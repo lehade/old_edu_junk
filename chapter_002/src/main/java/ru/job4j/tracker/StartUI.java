@@ -108,15 +108,21 @@ public class StartUI {
         String name = this.input.ask("Введите имя заявки :");
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
-        this.tracker.replace(id, item);
-        System.out.println("------------ Готово --------------");
+        if (this.tracker.replace(id, item)) {
+            System.out.println("------------ Готово --------------");
+        } else {
+            System.out.println("------------ Ошибка выполнения --------------");
+        }
     }
 
     private void delete() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите id заявки :");
-        this.tracker.delete(id);
-        System.out.println("------------ Готово --------------");
+        if (this.tracker.delete(id)) {
+            System.out.println("------------ Готово --------------");
+        } else {
+            System.out.println("------------ Ошибка выполнения --------------");
+        }
     }
 
     private void findById() {
