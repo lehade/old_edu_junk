@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -13,9 +15,10 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
+    private final Tracker tracker = new Tracker();
+
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
@@ -23,8 +26,6 @@ public class StartUITest {
 
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-
-        Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         new StartUI(input, tracker).init();
@@ -33,7 +34,6 @@ public class StartUITest {
 
     @Test
     public void getById() {
-        Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getId(), "6"});
         new StartUI(input, tracker).init();
@@ -42,7 +42,6 @@ public class StartUITest {
 
     @Test
     public void getByName() {
-        Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Item item1 = tracker.add(new Item("test name1", "desc"));
         Item item2 = tracker.add(new Item("test name", "desc2"));
@@ -56,7 +55,6 @@ public class StartUITest {
 
     @Test
     public void deleteItem() {
-        Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         Item item3 = tracker.add(new Item("test name3", "desc3"));
@@ -69,9 +67,30 @@ public class StartUITest {
         assertThat(tracker.findAll(), is(expected));
     }
 
+    private final StringBuilder menu = new StringBuilder()
+            .append("Меню.")
+            .append(System.lineSeparator())
+            .append("0. Add new Item")
+            .append(System.lineSeparator())
+            .append("1. Show all items")
+            .append(System.lineSeparator())
+            .append("2. Edit item")
+            .append(System.lineSeparator())
+            .append("3. Delete item")
+            .append(System.lineSeparator())
+            .append("4. Find item by Id")
+            .append(System.lineSeparator())
+            .append("5. Find items by name")
+            .append(System.lineSeparator())
+            .append("6. Exit Program")
+            .append(System.lineSeparator());
+
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
     @Test
     public void showAll() {
-        Tracker tracker = new Tracker();
+        System.setOut(new PrintStream(out));
         Item item = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         Item item3 = tracker.add(new Item("test name3", "desc3"));
@@ -79,12 +98,29 @@ public class StartUITest {
         Item item5 = tracker.add(new Item("test name5", "desc5"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
-        Item[] expected = new Item[5];
-        expected[0] = item;
-        expected[1] = item2;
-        expected[2] = item3;
-        expected[3] = item4;
-        expected[4] = item5;
-        assertThat(tracker.findAll(), is(expected));
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(menu)
+                                .append("------------ Вывод всех заявок --------------")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item.getId() + " Name: test name Description: desc")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item2.getId() + " Name: test name2 Description: desc2")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item3.getId() + " Name: test name3 Description: desc3")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item4.getId() + " Name: test name4 Description: desc4")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item5.getId() + " Name: test name5 Description: desc5")
+                                .append(System.lineSeparator())
+                                .append("------------ Конец --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .toString()
+                )
+        );
+        System.setOut(this.stdout);
     }
 }
