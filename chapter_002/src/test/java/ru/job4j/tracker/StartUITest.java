@@ -1,9 +1,12 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,7 +29,7 @@ public class StartUITest {
 
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        Item item = tracker.add(new Item("test name", "desc"));
+        Item item = tracker.add(new Item("test name2", "desc"));
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
@@ -34,37 +37,42 @@ public class StartUITest {
 
     @Test
     public void getById() {
-        Item item = tracker.add(new Item("test name", "desc"));
+        Item item = tracker.add(new Item("test name3", "desc"));
         Input input = new StubInput(new String[]{"4", item.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+        assertThat(tracker.findById(item.getId()).getName(), is("test name3"));
     }
 
     @Test
     public void getByName() {
-        Item item = tracker.add(new Item("test name", "desc"));
+        Item item = tracker.add(new Item("test", "desc"));
         Item item1 = tracker.add(new Item("test name1", "desc"));
-        Item item2 = tracker.add(new Item("test name", "desc2"));
+        Item item2 = tracker.add(new Item("test", "desc2"));
         Input input = new StubInput(new String[]{"5", item.getName(), "6"});
         new StartUI(input, tracker).init();
         Item[] expected = new Item[2];
         expected[0] = item;
         expected[1] = item2;
-        assertThat(tracker.findByName("test name"), is(expected));
+        assertThat(tracker.findByName("test"), is(expected));
     }
 
-    @Test
-    public void deleteItem() {
-        Item item = tracker.add(new Item("test name", "desc"));
-        Item item2 = tracker.add(new Item("test name2", "desc2"));
-        Item item3 = tracker.add(new Item("test name3", "desc3"));
-        Input input = new StubInput(new String[]{"3", item2.getId(), "6"});
-        new StartUI(input, tracker).init();
-        tracker.delete(item2.getId());
-        Item[] expected = new Item[2];
-        expected[0] = item;
-        expected[1] = item3;
-        assertThat(tracker.findAll(), is(expected));
+    /**
+     * Общие объекты для тестов.
+     */
+    private Item item = tracker.add(new Item("test name", "desc"));
+    private Item item2 = tracker.add(new Item("test name2", "desc2"));
+    private Item item3 = tracker.add(new Item("test name3", "desc3"));
+    private Item item4 = tracker.add(new Item("test name4", "desc4"));
+    private Item item5 = tracker.add(new Item("test name5", "desc5"));
+
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
     }
 
     private final StringBuilder menu = new StringBuilder()
@@ -90,12 +98,6 @@ public class StartUITest {
 
     @Test
     public void showAll() {
-        System.setOut(new PrintStream(out));
-        Item item = tracker.add(new Item("test name", "desc"));
-        Item item2 = tracker.add(new Item("test name2", "desc2"));
-        Item item3 = tracker.add(new Item("test name3", "desc3"));
-        Item item4 = tracker.add(new Item("test name4", "desc4"));
-        Item item5 = tracker.add(new Item("test name5", "desc5"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
         assertThat(
@@ -121,6 +123,65 @@ public class StartUITest {
                                 .toString()
                 )
         );
-        System.setOut(this.stdout);
+    }
+
+    @Test
+    public void editItemErr() {
+        Input input = new StubInput(new String[]{"2", "666", "test replace", "заменили заявку", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(menu)
+                                .append("------------ Редактирование заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Ошибка выполнения --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void deleteItemTest() {
+        Input input = new StubInput(new String[]{"3", item.getId(), "3", item2.getId(), "3", item3.getId(), "3", item4.getId(), "1", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(menu)
+                                .append("------------ Удаление заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Готово --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .append("------------ Удаление заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Готово --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .append("------------ Удаление заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Готово --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .append("------------ Удаление заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Готово --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .append("------------ Вывод всех заявок --------------")
+                                .append(System.lineSeparator())
+                                .append("Id: " + item5.getId() + " Name: test name5 Description: desc5")
+                                .append(System.lineSeparator())
+                                .append("------------ Конец --------------")
+                                .append(System.lineSeparator())
+                                .append(menu)
+                                .toString()
+                )
+        );
     }
 }
