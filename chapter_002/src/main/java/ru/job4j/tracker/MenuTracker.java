@@ -36,9 +36,9 @@ public class MenuTracker {
         this.actions[0] = new AddItem();
         this.actions[1] = new ShowItems();
         this.actions[2] = new EditItem();
-        this.actions[3] = new delete();
-        this.actions[4] = new findById();
-        this.actions[5] = new findByName();
+        this.actions[3] = new Delete();
+        this.actions[4] = new FindById();
+        this.actions[5] = new FindByName();
     }
 
     public void select(int key) {
@@ -47,6 +47,7 @@ public class MenuTracker {
     }
 
     public void show() {
+        System.out.println("Меню.");
         for (UserAction action : this.actions) {
             if (action != null) {
                 System.out.println(action.info());
@@ -66,7 +67,6 @@ public class MenuTracker {
             Item item = new Item(name, desc);
             tracker.add(item);
             System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
-
         }
 
         public String info() {
@@ -82,9 +82,11 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Вывод всех заявок --------------");
             for (Item items : tracker.findAll()) {
-                System.out.println(String.format("%s. %s. %s", items.getId(), items.getName(), items.getDescription()));
-                System.out.println("------------ Конец --------------");
+                System.out.println(
+                        String.format("%s: %s %s: %s %s: %s", "Id", items.getId(),
+                                "Name", items.getName(), "Description", items.getDescription()));
             }
+            System.out.println("------------ Конец --------------");
         }
 
         public String info() {
@@ -115,7 +117,7 @@ public class MenuTracker {
         }
     }
 
-    private static class delete implements UserAction {
+    private static class Delete implements UserAction {
         public int key() {
             return 3;
         }
@@ -135,7 +137,7 @@ public class MenuTracker {
         }
     }
 
-    private static class findById implements UserAction {
+    private static class FindById implements UserAction {
         public int key() {
             return 4;
         }
@@ -153,7 +155,7 @@ public class MenuTracker {
         }
     }
 
-    private static class findByName implements UserAction {
+    private static class FindByName implements UserAction {
         public int key() {
             return 5;
         }

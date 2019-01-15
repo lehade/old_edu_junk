@@ -22,7 +22,7 @@ public class StartUITest {
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
@@ -30,7 +30,7 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Item item = tracker.add(new Item("test name2", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -38,7 +38,7 @@ public class StartUITest {
     @Test
     public void getById() {
         Item item = tracker.add(new Item("test name3", "desc"));
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test name3"));
     }
@@ -48,7 +48,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test", "desc"));
         Item item1 = tracker.add(new Item("test name1", "desc"));
         Item item2 = tracker.add(new Item("test", "desc2"));
-        Input input = new StubInput(new String[]{"5", item.getName(), "6"});
+        Input input = new StubInput(new String[]{"5", item.getName(), "y"});
         new StartUI(input, tracker).init();
         Item[] expected = new Item[2];
         expected[0] = item;
@@ -78,19 +78,17 @@ public class StartUITest {
     private final StringBuilder menu = new StringBuilder()
             .append("Меню.")
             .append(System.lineSeparator())
-            .append("0. Add new Item")
+            .append("0. Добавить заявку")
             .append(System.lineSeparator())
-            .append("1. Show all items")
+            .append("1. Показать все заявки")
             .append(System.lineSeparator())
-            .append("2. Edit item")
+            .append("2. Редактирование заявки")
             .append(System.lineSeparator())
-            .append("3. Delete item")
+            .append("3. Удаление заявки")
             .append(System.lineSeparator())
-            .append("4. Find item by Id")
+            .append("4. Поиск по Id заявки")
             .append(System.lineSeparator())
-            .append("5. Find items by name")
-            .append(System.lineSeparator())
-            .append("6. Exit Program")
+            .append("5. Поиск по имени заявки")
             .append(System.lineSeparator());
 
     private final PrintStream stdout = System.out;
@@ -98,7 +96,7 @@ public class StartUITest {
 
     @Test
     public void showAll() {
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(out.toByteArray()),
@@ -119,7 +117,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("------------ Конец --------------")
                                 .append(System.lineSeparator())
-                                .append(menu)
                                 .toString()
                 )
         );
@@ -127,7 +124,7 @@ public class StartUITest {
 
     @Test
     public void editItemErr() {
-        Input input = new StubInput(new String[]{"2", "666", "test replace", "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", "666", "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(out.toByteArray()),
@@ -138,7 +135,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("------------ Ошибка выполнения --------------")
                                 .append(System.lineSeparator())
-                                .append(menu)
                                 .toString()
                 )
         );
@@ -146,7 +142,7 @@ public class StartUITest {
 
     @Test
     public void deleteItemTest() {
-        Input input = new StubInput(new String[]{"3", item.getId(), "3", item2.getId(), "3", item3.getId(), "3", item4.getId(), "1", "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "3", "3", item2.getId(), "3", "3", item3.getId(), "3", "3", item4.getId(), "3", "1", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(out.toByteArray()),
@@ -179,7 +175,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("------------ Конец --------------")
                                 .append(System.lineSeparator())
-                                .append(menu)
                                 .toString()
                 )
         );
