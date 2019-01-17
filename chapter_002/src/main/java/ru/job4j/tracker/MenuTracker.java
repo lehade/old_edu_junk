@@ -41,6 +41,14 @@ public class MenuTracker {
         this.actions[5] = new FindByName();
     }
 
+    public int[] getLength() {
+        int[] length = new int[this.actions.length];
+        for (int index = 0; index < length.length; index++) {
+            length[index] = index;
+        }
+        return length;
+    }
+
     public void select(int key) {
         this.actions[key].execute(this.input, this.tracker);
 

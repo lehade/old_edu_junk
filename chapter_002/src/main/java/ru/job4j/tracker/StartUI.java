@@ -36,12 +36,7 @@ public class StartUI {
         menu.init();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Выберите действие: "));
-            if (key >= 0 && key < 6) {
-                menu.select(key);
-            } else {
-                System.out.println("Выберите пункт от 0 до 5");
-            }
+                menu.select(input.ask("Выберите пункт меню:", menu.getLength()));
         } while (!"y".equals(this.input.ask("Выход? (y): ")));
     }
 
@@ -51,6 +46,6 @@ public class StartUI {
      * @param args ввод данных
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
