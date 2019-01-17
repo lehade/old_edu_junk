@@ -1,5 +1,10 @@
 package ru.job4j.tracker;
 
+/**
+ * @author Alexey Denisenko
+ * @version 0.1
+ * @since 17.01.2019
+ */
 public class ValidateInput extends ConsoleInput {
 
     public int ask(String question, int[] range) {
