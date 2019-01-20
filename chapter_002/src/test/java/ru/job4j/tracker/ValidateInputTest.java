@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * @author Alexey Denisenko
  * @version 0.1
- * @since 17.01.2019
+ * @since 20.01.2019
  */
 public class ValidateInputTest {
 
@@ -52,7 +52,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("Please enter validate data again.%n")
+                        String.format("Выберите корректное действие из списка:%n")
                 )
         );
     }
