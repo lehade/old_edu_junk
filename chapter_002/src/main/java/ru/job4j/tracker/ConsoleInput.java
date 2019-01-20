@@ -25,11 +25,9 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return key;
-        } else {
-            key:
+        if (!exist) {
             throw new MenuException("Выбор вне значений меню.");
         }
+        return key;
     }
 }
