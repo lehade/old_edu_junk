@@ -63,9 +63,9 @@ public class MenuTracker {
         }
     }
 
-    private class AddItem implements UserAction {
-        public int key() {
-            return 0;
+    private class AddItem extends BaseAction {
+        public AddItem() {
+            super(0, "Добавить заявку");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -77,14 +77,11 @@ public class MenuTracker {
             System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
         }
 
-        public String info() {
-            return String.format("%s. %s", this.key(), "Добавить заявку");
-        }
     }
 
-    private static class ShowItems implements UserAction {
-        public int key() {
-            return 1;
+    private static class ShowItems extends BaseAction {
+        public ShowItems() {
+            super(1, "Показать все заявки");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -96,15 +93,11 @@ public class MenuTracker {
             }
             System.out.println("------------ Конец --------------");
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Показать все заявки");
-        }
     }
 
-    private static class EditItem implements UserAction {
-        public int key() {
-            return 2;
+    private static class EditItem extends BaseAction {
+        public EditItem() {
+            super(2, "Редактирование заявки");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -119,15 +112,11 @@ public class MenuTracker {
                 System.out.println("------------ Ошибка выполнения --------------");
             }
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Редактирование заявки");
-        }
     }
 
-    private static class Delete implements UserAction {
-        public int key() {
-            return 3;
+    private static class Delete extends BaseAction {
+        public Delete() {
+            super(3, "Удаление заявки");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -139,15 +128,11 @@ public class MenuTracker {
                 System.out.println("------------ Ошибка выполнения --------------");
             }
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Удаление заявки");
-        }
     }
 
-    private static class FindById implements UserAction {
-        public int key() {
-            return 4;
+    private static class FindById extends BaseAction {
+        public FindById() {
+            super(4, "Поиск по Id заявки");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -157,15 +142,11 @@ public class MenuTracker {
             System.out.println(String.format("%s. %s. %s", item.getId(), item.getName(), item.getDescription()));
             System.out.println("------------ Конец --------------");
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Поиск по Id заявки");
-        }
     }
 
-    private static class FindByName implements UserAction {
-        public int key() {
-            return 5;
+    private static class FindByName extends BaseAction {
+        public FindByName() {
+            super(5, "Поиск по имени заявки");
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -175,10 +156,6 @@ public class MenuTracker {
                 System.out.println(String.format("%s. %s. %s", item.getId(), item.getName(), item.getDescription()));
             }
             System.out.println("------------ Конец --------------");
-        }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Поиск по имени заявки");
         }
     }
 
