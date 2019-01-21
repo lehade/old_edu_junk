@@ -89,6 +89,8 @@ public class StartUITest {
             .append("4. Поиск по Id заявки")
             .append(System.lineSeparator())
             .append("5. Поиск по имени заявки")
+            .append(System.lineSeparator())
+            .append("6. Выход")
             .append(System.lineSeparator());
 
     private final PrintStream stdout = System.out;

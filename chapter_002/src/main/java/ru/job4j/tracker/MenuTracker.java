@@ -19,7 +19,7 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
-    private UserAction[] actions = new UserAction[6];
+    private UserAction[] actions = new UserAction[7];
 
     /**
      * Конструктор.
@@ -39,6 +39,7 @@ public class MenuTracker {
         this.actions[3] = new Delete();
         this.actions[4] = new FindById();
         this.actions[5] = new FindByName();
+        this.actions[6] = new Exit();
     }
 
     public int[] getLength() {
@@ -61,6 +62,16 @@ public class MenuTracker {
                 System.out.println(action.info());
             }
         }
+    }
+
+    private class Exit extends BaseAction {
+        public Exit() {
+            super(6, "Выход");
+        }
+        public void execute(Input input, Tracker tracker) {
+
+        }
+
     }
 
     private class AddItem extends BaseAction {
