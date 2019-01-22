@@ -52,7 +52,6 @@ public class MenuTracker {
 
     public void select(int key) {
         this.actions[key].execute(this.input, this.tracker);
-
     }
 
     public void show() {
