@@ -10,23 +10,8 @@ import ru.job4j.tracker.Item;
 
 public class TrackerSingleLaLo {
 
-    private TrackerSingleLaLo() {
-    }
-
-    public static TrackerSingleLaLo getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    public Item add(Item model) {
-        return model;
-    }
-
-    private static final class Holder {
-        private static final TrackerSingleLaLo INSTANCE = new TrackerSingleLaLo();
-    }
-
-    public static void main(String[] args) {
-        TrackerSingleLaLo tracker = TrackerSingleLaLo.getInstance();
+    int xxx(){
+        return -1;
     }
 
 }

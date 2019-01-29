@@ -9,21 +9,7 @@ import ru.job4j.tracker.Item;
  */
 
 public class TrackerSingleEagLo {
-    private static final TrackerSingleEagLo INSTANCE = new TrackerSingleEagLo();
-
-
-    private TrackerSingleEagLo() {
-    }
-
-    public static TrackerSingleEagLo getInstance() {
-        return INSTANCE;
-    }
-
-    public Item add(Item model) {
-        return model;
-    }
-
-    public static void main(String[] args) {
-        TrackerSingleEagLo tracker = TrackerSingleEagLo.getInstance();
+    int xxx(){
+        return -1;
     }
 }
