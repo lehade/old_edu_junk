@@ -11,9 +11,7 @@ import java.util.Random;
  */
 
 public enum TrackerSingleEnum {
-
     INSTANCE;
-
     Tracker tracker = new Tracker();
     private static final Random RN = new Random();
 

@@ -27,5 +27,4 @@ public class SingleEnumTest {
         TrackerSingleEnum tracker2 = TrackerSingleEnum.INSTANCE;
         assertThat(tracker, is(tracker2));
     }
-
 }
