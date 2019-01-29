@@ -15,12 +15,20 @@ public class SingleEnumTest {
 
     TrackerSingleEnum tracker = TrackerSingleEnum.INSTANCE;
 
+    /**
+     * Тест на проверку добавления заявки через класс синглтона.
+     */
+
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         assertThat(tracker.findAll()[0], is(item));
     }
+
+    /**
+     * Тест на проверку синглетности.
+     */
 
     @Test
     public void singletonTest() {

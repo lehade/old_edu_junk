@@ -63,6 +63,4 @@ public enum TrackerSingleEnum {
     private String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
     }
-
-
 }
