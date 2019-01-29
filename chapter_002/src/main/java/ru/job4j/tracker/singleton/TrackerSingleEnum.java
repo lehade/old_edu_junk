@@ -1,9 +1,7 @@
-package ru.job4j.tracker.Singleton;
+package ru.job4j.tracker.singleton;
 
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
-
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -14,9 +12,9 @@ import java.util.Random;
 
 public enum TrackerSingleEnum {
 
-    INSTANCE; // здесь мы указываем перечисления.
+    INSTANCE;
 
-    private static TrackerSingleEnum tracker = TrackerSingleEnum.INSTANCE;
+    Tracker tracker = new Tracker();
     private static final Random RN = new Random();
 
     /**
