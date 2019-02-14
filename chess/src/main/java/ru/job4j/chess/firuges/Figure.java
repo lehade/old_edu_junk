@@ -1,6 +1,6 @@
 package ru.job4j.chess.firuges;
 
-import ru.job4j.chess.exception.ImposibleMoveException;
+import ru.job4j.chess.exception.ImpossibleMoveException;
 
 public abstract class  Figure {
 
@@ -14,7 +14,7 @@ public abstract class  Figure {
         return this.position;
     }
 
-    public abstract Cell[] way(Cell source, Cell dest) throws ImposibleMoveException;
+    public abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
 
     public String icon() {
         return String.format(

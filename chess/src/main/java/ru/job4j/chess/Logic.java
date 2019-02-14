@@ -23,7 +23,8 @@ public class Logic {
     public boolean move(Cell source, Cell dest) {
         boolean rst = false;
         int index = this.findBy(source);
-        if (index != -1) {
+        int target = this.findBy(dest);
+        if (index != -1 && target == -1) {
             Cell[] steps = this.figures[index].way(source, dest);
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                 rst = true;
