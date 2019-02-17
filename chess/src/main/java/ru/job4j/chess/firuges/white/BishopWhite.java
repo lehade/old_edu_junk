@@ -1,5 +1,6 @@
 package ru.job4j.chess.firuges.white;
 
+import ru.job4j.chess.exception.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -16,8 +17,19 @@ public class BishopWhite extends Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest)  {
-        return new Cell[] { dest };
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+        Cell[] steps = new Cell[0];
+        int move = source.x - dest.x;
+        boolean trueMove = false;
+        if ((source.y == dest.y + move && source.x == dest.x + move)
+                || (source.y == dest.y - move && source.x == dest.x + move)) {
+            steps = new Cell[]{dest};
+            trueMove = true;
+        }
+        if (!trueMove) {
+            throw new ImpossibleMoveException();
+        }
+        return steps;
     }
 
     @Override
