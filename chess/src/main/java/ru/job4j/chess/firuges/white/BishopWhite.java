@@ -18,18 +18,27 @@ public class BishopWhite extends Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        Cell[] steps = new Cell[0];
-        int move = source.x - dest.x;
-        boolean trueMove = false;
-        if ((source.y == dest.y + move && source.x == dest.x + move)
-                || (source.y == dest.y - move && source.x == dest.x + move)) {
-            steps = new Cell[]{dest};
-            trueMove = true;
-        }
-        if (!trueMove) {
+        if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException();
         }
+
+        int size = Math.abs(source.x - dest.x);
+        Cell[] steps = new Cell[size];
+
+        int deltaX = Integer.compare(source.x, dest.x);
+        int deltaY = Integer.compare(source.y, dest.y);
+
+        for (int index = 0; index < steps.length; index++) {
+            steps[index] = Cell.values()[(8 * (source.x - deltaX)) + (source.y - deltaY)];
+            deltaX = deltaX < 0 ? deltaX - 1 : deltaX + 1;
+            deltaY = deltaY < 0 ? deltaY - 1 : deltaY + 1;
+        }
+
         return steps;
+    }
+
+    public boolean isDiagonal(Cell source, Cell dest) {
+        return Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y);
     }
 
     @Override

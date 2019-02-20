@@ -1,6 +1,7 @@
 package ru.job4j.chess;
 
 import ru.job4j.chess.exception.ImpossibleMoveException;
+import ru.job4j.chess.exception.OccupiedWayException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 /**
  * //TODO add comments.
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Alexey Denisenko
  * @version $Id$
  * @since 0.1
  */
@@ -28,13 +29,24 @@ public class Logic {
         if (index != -1 && target == -1) {
             try {
                 Cell[] steps = this.figures[index].way(source, dest);
-                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+
+                for (Cell step : steps) {
+                       int check = this.findBy(step);
+                        if (check != -1) {
+                            throw new OccupiedWayException();
+                        }
+                }
+                if (steps.length > 0 ) {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
+
             }
             catch (ImpossibleMoveException ime) {
                 System.out.println("Impossible move!");
+            }
+            catch (OccupiedWayException owe) {
+                System.out.println("No path!");
             }
         }
         return rst;
