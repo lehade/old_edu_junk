@@ -1,6 +1,7 @@
 package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.exception.ImpossibleMoveException;
+import ru.job4j.chess.exception.OccupiedWayException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -16,7 +17,7 @@ public class BishopBlack extends Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException {
         if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException();
         }

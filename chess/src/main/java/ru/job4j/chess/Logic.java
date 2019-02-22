@@ -27,26 +27,17 @@ public class Logic {
         int index = this.findBy(source);
         int target = this.findBy(dest);
         if (index != -1 && target == -1) {
-            try {
-                Cell[] steps = this.figures[index].way(source, dest);
+            Cell[] steps = this.figures[index].way(source, dest);
 
-                for (Cell step : steps) {
-                       int check = this.findBy(step);
-                        if (check != -1) {
-                            throw new OccupiedWayException();
-                        }
+            for (Cell step : steps) {
+                int check = this.findBy(step);
+                if (check != -1) {
+                    throw new OccupiedWayException();
                 }
-                if (steps.length > 0 ) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
-                }
-
             }
-            catch (ImpossibleMoveException ime) {
-                System.out.println("Impossible move!");
-            }
-            catch (OccupiedWayException owe) {
-                System.out.println("No path!");
+            if (steps.length > 0) {
+                rst = true;
+                this.figures[index] = this.figures[index].copy(dest);
             }
         }
         return rst;
