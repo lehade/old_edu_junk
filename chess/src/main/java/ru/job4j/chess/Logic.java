@@ -1,5 +1,6 @@
 package ru.job4j.chess;
 
+import ru.job4j.chess.exception.FigureNotFoundException;
 import ru.job4j.chess.exception.ImpossibleMoveException;
 import ru.job4j.chess.exception.OccupiedWayException;
 import ru.job4j.chess.firuges.Cell;
@@ -39,6 +40,9 @@ public class Logic {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
+        }
+        else {
+            throw new FigureNotFoundException();
         }
         return rst;
     }

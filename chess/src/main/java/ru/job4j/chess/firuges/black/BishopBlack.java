@@ -23,15 +23,14 @@ public class BishopBlack extends Figure {
         }
 
         int size = Math.abs(source.x - dest.x);
+
         Cell[] steps = new Cell[size];
 
-        int deltaX = Integer.compare(source.x, dest.x);
-        int deltaY = Integer.compare(source.y, dest.y);
+        int deltaX = source.x < dest.x ? 1 : -1;
+        int deltaY = source.y < dest.y ? 1 : -1;
 
         for (int index = 0; index < steps.length; index++) {
-            steps[index] = Cell.values()[(8 * (source.x - deltaX)) + (source.y - deltaY)];
-            deltaX = deltaX < 0 ? deltaX - 1 : deltaX + 1;
-            deltaY = deltaY < 0 ? deltaY - 1 : deltaY + 1;
+            steps[index] = Cell.values()[(source.x + deltaX * (index + 1)) * 8 + (source.y + deltaY * (index + 1))];
         }
 
         return steps;
