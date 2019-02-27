@@ -27,23 +27,25 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);
         int target = this.findBy(dest);
-        if (index != -1 && target == -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-
-            for (Cell step : steps) {
-                int check = this.findBy(step);
-                if (check != -1) {
-                    throw new OccupiedWayException();
-                }
-            }
-            if (steps.length > 0) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
-        }
-        else {
+        if (index == -1 && target == -1) {
             throw new FigureNotFoundException();
         }
+        Cell[] steps = this.figures[index].way(source, dest);
+
+        for (Cell step : steps) {
+            int check = this.findBy(step);
+            if (check != -1) {
+                throw new OccupiedWayException();
+            }
+        }
+        if (steps.length > 0) {
+            rst = true;
+            this.figures[index] = this.figures[index].copy(dest);
+        }
+        //}
+        //else {
+        //    throw new FigureNotFoundException();
+        //}
         return rst;
     }
 
