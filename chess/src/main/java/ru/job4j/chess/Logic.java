@@ -27,7 +27,7 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);
         int target = this.findBy(dest);
-        if (index == -1 && target == -1) {
+        if (index == -1) {
             throw new FigureNotFoundException();
         }
         Cell[] steps = this.figures[index].way(source, dest);
