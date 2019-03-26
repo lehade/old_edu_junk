@@ -13,15 +13,14 @@ public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
         int cells = (int) Math.ceil(list.size() / (double) rows);
         int[][] array = new int[rows][cells];
-        int index = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cells; j++) {
-                if (index >= list.size()) {
-                    array[i][j] = 0;
-                } else {
-                    array[i][j] = list.get(index++);
-                }
+        int cell = 0;
+        int row = 0;
+        for (int i : list) {
+            if (cell == cells) {
+                row++;
+                cell = 0;
             }
+            array[row][cell++] = i;
         }
         return array;
     }
